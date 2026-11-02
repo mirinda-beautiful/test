@@ -19,8 +19,9 @@ Plus **DeViL 32-query** perturbation regeneration comparison (baseline / R1 / R2
 
 Acceptance on a clean checkout of this package:
 
-- `scripts/validate_outputs.py` → **116/116**
+- `scripts/validate_outputs.py` → **149/149** (means + CI endpoints vs `data/reference/`)
 - `stvg_protocol_toolkit/tests/test_edge_cases.py` → **9/9**
+- `scripts/test_validate_negative_controls.py` → must fail on corrupted/missing CI (temp copies only)
 
 ## Requirements
 
@@ -62,6 +63,7 @@ Then verify:
 ```bash
 python scripts/validate_outputs.py
 python stvg_protocol_toolkit/tests/test_edge_cases.py
+python scripts/test_validate_negative_controls.py
 ```
 
 `validate_outputs.py` regenerates nothing; run `audit_protocol.py` first so `outputs/`

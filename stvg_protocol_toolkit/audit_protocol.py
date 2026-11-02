@@ -25,16 +25,18 @@ from protocol_toolkit.aggregate import aggregate_group, aggregate_regen, score_q
 
 def load_jsonl(path: Path) -> List[Dict[str, Any]]:
     rows = []
-    for line in path.open():
-        if line.strip():
-            rows.append(json.loads(line))
+    with path.open(encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                rows.append(json.loads(line))
     return rows
 
 
 def write_csv(path: Path, rows: List[Dict[str, Any]], fields: List[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    # Force LF line endings on all platforms so SHA256SUMS stay portable.
     with path.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in rows:
             w.writerow({k: r.get(k) for k in fields})
@@ -48,7 +50,7 @@ def main() -> int:
     ap.add_argument("--skip-iou-recompute", action="store_true")
     args = ap.parse_args()
 
-    cfg = json.loads(args.config.read_text())
+    cfg = json.loads(args.config.read_text(encoding="utf-8"))
     B = int(cfg["bootstrap_B"])
     seed = int(cfg["bootstrap_seed"])
     out = args.out

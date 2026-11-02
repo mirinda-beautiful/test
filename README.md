@@ -16,7 +16,7 @@
   <p>
     <img src="https://img.shields.io/badge/Python-3.9%2B-blue" alt="Python" />
     <img src="https://img.shields.io/badge/Runtime-CPU%20only-brightgreen" alt="CPU" />
-    <img src="https://img.shields.io/badge/Validation-116%2F116-success" alt="Validation 116/116" />
+    <img src="https://img.shields.io/badge/Validation-149%2F149-success" alt="Validation 149/149" />
     <img src="https://img.shields.io/badge/Controls-9%2F9-success" alt="Controls 9/9" />
     <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
   </p>
@@ -37,14 +37,16 @@
 
 The toolkit does **not** run models, load weights, or read raw videos. All headline numbers below use the **frozen scoring** definition in `stvg_protocol_toolkit/config/stat_config.json`.
 
+**Attack arms.** **S** is the spatial-target attack; **T** is the temporally related target attack. The spatial target contrast is the damage difference **S−T** under each scoring rule. Aggregates are **query-equal-weighted**. VidSTG bootstrap clusters by video; HC-STVG’s 100 clips map to **69** source-video groups. Bootstrap uses **B=10000** and **seed=20261008**. Ranking flips are **query-level strict** order reversals.
+
 ## Key Results
 
 <p align="center">
   <img src="./assets/figures/protocol_effect.png" alt="Protocol effect: overlap vs fixed GT-frame spatial target contrast" width="92%" />
 </p>
-<p align="center"><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast relative to overlap-conditioned scoring.</em></p>
+<p align="center"><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast (S−T damage) relative to overlap-conditioned scoring.</em></p>
 
-Frozen paired protocol effect $W=\mathrm{mean}(d_{\mathrm{GT}}-d_{\mathrm{ov}})$, with $d=s_T-s_S$. Values below are recomputed from archived boxes and temporal intervals.
+Frozen paired protocol effect $W=\mathrm{mean}(d_{\mathrm{GT}}-d_{\mathrm{ov}})$, with $d=s_T-s_S$. Values below are recomputed from archived boxes and temporal intervals (query-equal weights; clustered bootstrap CIs).
 
 | Dataset | Model | Common Queries | W (95% CI) | Strict Rank Flips |
 |---|---|---:|---|---|
@@ -70,6 +72,7 @@ python audit_protocol.py \
 
 python scripts/validate_outputs.py
 python stvg_protocol_toolkit/tests/test_edge_cases.py
+python scripts/test_validate_negative_controls.py
 ```
 
 This release recomputes **scores and statistics from frozen predictions**. It does not reproduce GPU model inference.
@@ -102,7 +105,7 @@ This release recomputes **scores and statistics from frozen predictions**. It do
 
 `W = mean(d_GT − d_ov)` with `d = s_T − s_S`, `g = s_GT − s_ov`, `w = g_T − g_S`.
 
-Bootstrap: B=10000, seed=20261008; VidSTG clusters by `video_id`, HC-STVG by `source_video_id`; ranking ε=1e-8.
+Bootstrap: B=10000, seed=20261008; VidSTG clusters by `video_id`, HC-STVG by `source_video_id` (100 clips / 69 source groups); ranking ε=1e-8; query-equal weights.
 
 **Mechanism labels**
 
@@ -125,12 +128,15 @@ Verified on a clean checkout of this package:
 
 | Check | Result |
 |---|---|
-| Statistical acceptance (`scripts/validate_outputs.py`) | **116/116** |
+| Statistical acceptance (`scripts/validate_outputs.py`) | **149/149** |
 | Known-output controls (`tests/test_edge_cases.py`) | **9/9** |
+| Negative controls (`scripts/test_validate_negative_controls.py`) | Pass (nonzero on corrupted / missing CI) |
 | Independent directory recomputation | Pass |
 | Common queries | 200 / 186 / 100 / 100 |
 | Strict query-level flips | 18/200, 40/186, 26/100, 36/100 |
 | Scoring gaps (`outputs/gaps.json`) | **0** |
+
+Acceptance now compares **CI endpoints** for W, overlap/fixed-GT spatial target contrasts, A/B/C decompositions, and strict/tie ranking rates against archived `data/reference/` tables (absolute tolerance \(10^{-12}\) for primary endpoints; \(10^{-9}\) retained for legacy decomp/regen checks).
 
 **Evidence scope.** DeViL original overlap full boxes were **not archived**. Frozen diagnostics in this toolkit use the **fixed-chain boxes** present in `pair_rows`. Regeneration (32-query) comparisons are likewise frozen-chain recomputations of archived rounds. This is distinct from any original-run scorer that consumed unrecovered overlap boxes.
 
@@ -138,6 +144,6 @@ Package-local technical README: [`stvg_protocol_toolkit/README.md`](stvg_protoco
 
 ## License and Acknowledgments
 
-- Toolkit code: [MIT](stvg_protocol_toolkit/LICENSE)
+- Toolkit / repository: [MIT](LICENSE) (package copy: [`stvg_protocol_toolkit/LICENSE`](stvg_protocol_toolkit/LICENSE))
 - Third-party notices: [`stvg_protocol_toolkit/THIRD_PARTY_NOTICES.md`](stvg_protocol_toolkit/THIRD_PARTY_NOTICES.md)
 - Upstream dataset licenses apply to raw videos (videos are **not** included). Model code and weights are **not** included.

@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local validation / packaging scratch
+tmp/
+.tmp/
+*.tmp
+stvg_negctrl_*/
+validation_tmp/
+*.orig
+*.rej
+
+# Do not track local delivery/preview backups if recreated under the repo
+assets/previews/
+assets/readme_preview.html
+PACKAGING_REPORT.txt
+stvg_protocol_toolkit_release.zip
+FINAL_REPOSITORY_CHECK.txt
