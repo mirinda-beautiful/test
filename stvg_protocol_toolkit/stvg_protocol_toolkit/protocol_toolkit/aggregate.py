@@ -42,9 +42,21 @@ def score_query(
     *,
     recompute_iou: bool = True,
     ranking_eps: float = NEAR,
+    empty_fixed_as_zero: Optional[bool] = None,
 ) -> Dict[str, Any]:
-    model = rec.get("model", "")
-    tube = "Tube" in model or model.lower() == "tubedetr"
+    """Score one query under overlap and fixed-GT protocols.
+
+    empty_fixed_as_zero:
+      None  — paper-compatible default: TubeDETR-like model names map empty
+              fixed-GT slots to 0.0; others keep unscorable None.
+      True/False — explicit policy (custom audits must set this; do not rely
+              on model-name heuristics).
+    """
+    if empty_fixed_as_zero is None:
+        model = rec.get("model", "")
+        tube = "Tube" in str(model) or str(model).lower() == "tubedetr"
+    else:
+        tube = bool(empty_fixed_as_zero)
     arms_out = {}
     for name in ("Clean", "S", "T"):
         if name not in rec.get("arms", {}):

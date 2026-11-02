@@ -19,9 +19,19 @@ Plus **DeViL 32-query** perturbation regeneration comparison (baseline / R1 / R2
 
 Acceptance on a clean checkout of this package:
 
-- `scripts/validate_outputs.py` → **149/149** (means + CI endpoints vs `data/reference/`)
+- `scripts/validate_outputs.py` → **149/149** (paper frozen tables; means + CI endpoints vs `data/reference/`)
 - `stvg_protocol_toolkit/tests/test_edge_cases.py` → **9/9**
 - `scripts/test_validate_negative_controls.py` → must fail on corrupted/missing CI (temp copies only)
+- `stvg_protocol_toolkit/tests/test_custom_audit.py` → custom demo / known-answer suite (**separate** from 149/149)
+
+Custom user audits:
+
+```bash
+python audit_custom.py \
+  --input examples/custom_predictions.jsonl \
+  --config config/custom_example.json \
+  --out outputs_custom_demo/
+```
 
 ## Requirements
 

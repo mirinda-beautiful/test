@@ -1,0 +1,23 @@
+{
+  "mode": "custom",
+  "demo_note": "Synthetic demo config for examples/custom_predictions.jsonl (not paper data).",
+  "bootstrap_B": 2000,
+  "bootstrap_seed": 20261008,
+  "ranking_eps": 1e-08,
+  "cluster_field": "source_video_id",
+  "groups": ["Demo_CustomModel"],
+  "require_clean": false,
+  "enable_regeneration": false,
+  "empty_fixed_as_zero": false,
+  "recompute_iou_from_boxes": true,
+  "fail_on_input_error": true,
+  "query_equal_weights": true,
+  "notes": {
+    "S": "spatial-target attack arm",
+    "T": "temporally related target attack arm",
+    "Clean": "optional baseline arm for sanity checks; not required for W",
+    "time": "integer inclusive frame indices on the original video",
+    "boxes": "absolute-pixel xywh; out-of-frame boxes are scored as-is (no extra clip)",
+    "fixed_GT": "pair_rows must contain spatial predictions on the GT candidate grid before temporal filtering"
+  }
+}

@@ -24,6 +24,7 @@ stvg_negctrl_*/
 validation_tmp/
 *.orig
 *.rej
+stvg_protocol_toolkit/outputs_custom_demo/
 
 # Do not track local delivery/preview backups if recreated under the repo
 assets/previews/
