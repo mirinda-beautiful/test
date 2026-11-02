@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8" /><title>STVG Protocol Toolkit — README Preview</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>STVG Protocol Toolkit — README Preview</title>
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:980px;margin:32px auto;padding:0 24px 64px;color:#24292f;line-height:1.6;background:#fff}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;max-width:980px;margin:32px auto;padding:0 24px 64px;color:#24292f;line-height:1.6;background:#fff}
 h1,h2,h3{border-bottom:1px solid #d0d7de;padding-bottom:.3em}
-div[align=center] h1{border-bottom:none}
 img{max-width:100%;height:auto}
 table{border-collapse:collapse;width:100%;margin:1em 0}
 th,td{border:1px solid #d0d7de;padding:8px 12px;text-align:left}
 code,pre{background:#f6f8fa;border-radius:6px}
 pre{padding:12px;overflow:auto}
-code{padding:.2em .4em}
-pre code{padding:0;background:transparent}
 details{margin:1em 0;padding:.5em 1em;border:1px solid #d0d7de;border-radius:6px}
 </style></head><body><div align="center">
   <h1>STVG Protocol Toolkit</h1>
@@ -43,17 +39,17 @@ details{margin:1em 0;padding:.5em 1em;border:1px solid #d0d7de;border-radius:6px
 <li>Supports CPU recomputation, mechanism decomposition (A/B/C), source-video clustered CIs, and automated validation</li>
 </ul>
 <h2>Overview</h2>
-<div align="center">
+<p align="center">
   <img src="figures/overview.png" alt="Overview of frozen STVG prediction audit and paired scoring protocols" width="92%" />
-  <p><em>Figure 1. Frozen model predictions are scored under a shared sampling map; overlap-conditioned and fixed GT-frame protocols are compared as a paired audit.</em></p>
-</div>
+</p>
+<p align="center"><em>Figure 1. Frozen model predictions are scored under a shared sampling map; overlap-conditioned and fixed GT-frame protocols are compared as a paired audit.</em></p>
 
 <p>The toolkit does <strong>not</strong> run models, load weights, or read raw videos. All headline numbers below use the <strong>frozen scoring</strong> definition in <code>stvg_protocol_toolkit/config/stat_config.json</code>.</p>
 <h2>Key Results</h2>
-<div align="center">
+<p align="center">
   <img src="figures/protocol_effect.png" alt="Protocol effect: overlap vs fixed GT-frame spatial target contrast" width="92%" />
-  <p><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast relative to overlap-conditioned scoring.</em></p>
-</div>
+</p>
+<p align="center"><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast relative to overlap-conditioned scoring.</em></p>
 
 <p>Frozen paired protocol effect $W=\mathrm{mean}(d_{\mathrm{GT}}-d_{\mathrm{ov}})$, with $d=s_T-s_S$. Values below are recomputed from archived boxes and temporal intervals.</p>
 <table>
