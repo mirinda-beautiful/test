@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stvg_protocol_toolkit/schemas/prediction.schema.json",
+  "title": "STVG frozen prediction record",
+  "type": "object",
+  "required": ["group", "dataset", "model", "sample_id", "video_id", "round", "arms"],
+  "properties": {
+    "group": { "type": "string", "description": "Evaluation group label (user-defined)." },
+    "dataset": { "type": "string" },
+    "model": { "type": "string" },
+    "sample_id": { "type": "string" },
+    "video_id": { "type": "string" },
+    "source_video_id": {
+      "type": "string",
+      "description": "Required when clustering by source_video_id (shared source clips)."
+    },
+    "cluster_id": { "type": "string" },
+    "round": { "type": "string", "default": "baseline" },
+    "exclusion_reason": {
+      "type": ["string", "null"],
+      "description": "Use no_gt_candidate_slots for query-level exclusions (not mechanism A)."
+    },
+    "n_gt_candidate_slots": { "type": "integer", "minimum": 0 },
+    "arms": {
+      "type": "object",
+      "required": ["S", "T"],
+      "properties": {
+        "Clean": { "$ref": "#/$defs/arm" },
+        "S": { "$ref": "#/$defs/arm" },
+        "T": { "$ref": "#/$defs/arm" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "arm": {
+      "type": "object",
+      "required": ["pred_temporal_frames", "gt_temporal", "pair_rows"],
+      "properties": {
+        "pred_temporal_frames": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "integer" },
+          "description": "Inclusive integer frame indices on the original video timeline."
+        },
+        "gt_temporal": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "integer" },
+          "description": "Inclusive integer GT frame interval; shared across S/T."
+        },
+        "pair_rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["abs_frame_id"],
+            "properties": {
+              "abs_frame_id": {
+                "type": "integer",
+                "description": "Absolute frame id before temporal filtering (needed for fixed GT-frame scoring)."
+              },
+              "gt_box_xywh": {
+                "type": ["array", "null"],
+                "minItems": 4,
+                "maxItems": 4,
+                "items": { "type": "number" },
+                "description": "Absolute-pixel xywh."
+              },
+              "pred_box_xywh": {
+                "type": ["array", "null"],
+                "minItems": 4,
+                "maxItems": 4,
+                "items": { "type": "number" },
+                "description": "Absolute-pixel xywh; may be null if spatial prediction missing."
+              },
+              "sampled_idx": { "type": ["integer", "null"] }
+            }
+          }
+        },
+        "sampling": {
+          "type": "object",
+          "properties": {
+            "frame_ids": { "type": "array", "items": { "type": "integer" } },
+            "gt_candidate_frame_ids": { "type": "array", "items": { "type": "integer" } }
+          }
+        },
+        "missing_evidence": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@
     <a href="#overview">Overview</a> ·
     <a href="#key-results">Key Results</a> ·
     <a href="#quick-start">Quick Start</a> ·
+    <a href="#use-your-own-predictions">Use Your Own Predictions</a> ·
     <a href="#reproducibility">Reproducibility</a>
   </p>
   <p>
@@ -64,7 +65,13 @@ Runnable package root: `stvg_protocol_toolkit/`.
 ```bash
 cd stvg_protocol_toolkit
 python -m pip install -r requirements.txt
+```
 
+### Reproduce Our Results
+
+Paper frozen evidence → dual-protocol audit (unchanged entrypoint):
+
+```bash
 python audit_protocol.py \
   --input data/raw_predictions.jsonl \
   --config config/stat_config.json \
@@ -75,7 +82,75 @@ python stvg_protocol_toolkit/tests/test_edge_cases.py
 python scripts/test_validate_negative_controls.py
 ```
 
-This release recomputes **scores and statistics from frozen predictions**. It does not reproduce GPU model inference.
+This path recomputes **scores and statistics from the archived paper predictions**. It does not reproduce GPU model inference.
+
+### Evaluate Your Own Predictions
+
+Export your model/attack boxes and times, then:
+
+```bash
+python audit_custom.py \
+  --input examples/custom_predictions.jsonl \
+  --config config/custom_example.json \
+  --out outputs_custom_demo/
+
+python stvg_protocol_toolkit/tests/test_custom_audit.py
+```
+
+Custom audits write to a **user-specified output directory** and do **not** need to match the paper 200/186/100/100 denominators.
+
+## Use Your Own Predictions
+
+Workflow:
+
+1. Run your STVG model or attack offline (GPU allowed on your side).
+2. Freeze predictions: temporal intervals + spatial boxes on a shared sampling grid.
+3. Convert exports into the JSONL schema (`schemas/prediction.schema.json`).
+4. Run `audit_custom.py` with your config (cluster field, bootstrap, groups).
+5. Inspect `protocol_summary.csv` (W / contrasts / CIs), ranking flips, A/B/C decomposition, and `coverage_and_exclusions.csv`.
+
+**Fixed GT-frame scoring needs pre-filter spatial predictions** on the GT candidate slots (`pair_rows.abs_frame_id` before temporal gating). Overlap scoring then selects the GT∩pred support from the same frozen rows.
+
+| Field | Role |
+|---|---|
+| `group` / `dataset` / `model` | User-defined labels (not hard-wired to paper groups) |
+| `sample_id`, `video_id`, `source_video_id`, `round` | Identity / clustering / multi-round |
+| `arms.S`, `arms.T` | Required paired attack conditions for target contrast and W |
+| `arms.Clean` | Optional baseline arm for sanity checks |
+| `gt_temporal`, `pred_temporal_frames` | Inclusive integer frame indices on the original video |
+| `pair_rows[]` | `abs_frame_id`, absolute-pixel `gt_box_xywh` / `pred_box_xywh` |
+
+<details>
+<summary><b>Custom export rules, checks, and outputs</b></summary>
+
+<br>
+
+**Export rules**
+
+- Time: original-video **inclusive** integer frame indices.
+- Boxes: absolute-pixel **xywh**. Convert other formats in your exporter.
+- S/T must share GT, sampling grid, and coordinate frame.
+- Out-of-image boxes are scored as-is (no extra clipping in this toolkit).
+- Legal zero IoU remains a valid scored support (mechanism C).
+- Missing temporal/spatial evidence is recorded as a **gap**, not silently as empty-time class A.
+- `exclusion_reason=no_gt_candidate_slots` is a query exclusion, distinct from mechanism A.
+- Model names do **not** select empty-fixed policies in `audit_custom.py`; set `empty_fixed_as_zero` explicitly in config.
+- Regeneration analysis is **off** unless `enable_regeneration` is set.
+
+**Config knobs** (`config/custom_example.json`): `cluster_field` (`video_id`|`source_video_id`), `bootstrap_B`, `bootstrap_seed`, `ranking_eps`, `groups`, `require_clean`, `enable_regeneration`.
+
+**Outputs** (example under `outputs_custom_demo/`):
+
+- `protocol_summary.csv` — scorable n, clusters, dual-protocol contrasts, W, 95% CIs
+- `per_query.csv` — per-query scores / contrasts / W
+- `decomposition_summary.csv` — A/B/C means and CIs
+- `ranking_summary.csv`, `ranking_per_query.csv` — strict flips / tie changes
+- `coverage_and_exclusions.csv` — coverage and skip reasons
+- `input_validation.json` — schema/consistency report
+
+The demo JSONL is **synthetic** (`examples/custom_predictions.jsonl`, 7 queries) for plumbing checks only.
+
+</details>
 
 ## Inputs and Outputs
 

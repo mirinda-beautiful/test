@@ -13,7 +13,7 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP_DIRS = {".git", "__pycache__", ".venv", "venv"}
+SKIP_DIRS = {".git", "__pycache__", ".venv", "venv", "outputs_custom_demo"}
 SKIP_NAMES = {"FILE_MANIFEST.csv", "SHA256SUMS.txt"}
 
 
@@ -25,8 +25,6 @@ def iter_files() -> list[Path]:
         if any(part in SKIP_DIRS for part in p.parts):
             continue
         rel = p.relative_to(ROOT).as_posix()
-        if p.name in SKIP_NAMES and rel in SKIP_NAMES:
-            continue
         if rel in SKIP_NAMES:
             continue
         files.append(p)
