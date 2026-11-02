@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8" /><title>STVG Protocol Toolkit — README Preview</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:980px;margin:32px auto;padding:0 24px 64px;color:#24292f;line-height:1.6;background:#fff}
+h1,h2,h3{border-bottom:1px solid #d0d7de;padding-bottom:.3em}
+div[align=center] h1{border-bottom:none}
+img{max-width:100%;height:auto}
+table{border-collapse:collapse;width:100%;margin:1em 0}
+th,td{border:1px solid #d0d7de;padding:8px 12px;text-align:left}
+code,pre{background:#f6f8fa;border-radius:6px}
+pre{padding:12px;overflow:auto}
+code{padding:.2em .4em}
+pre code{padding:0;background:transparent}
+details{margin:1em 0;padding:.5em 1em;border:1px solid #d0d7de;border-radius:6px}
+</style></head><body><div align="center">
+  <h1>STVG Protocol Toolkit</h1>
+  <p><b>Paired Audits of Scoring Protocols in Spatio-Temporal Video Grounding</b></p>
+  <p>
+    A CPU toolkit for auditing how scoring protocols affect measured attack selectivity
+    in spatio-temporal video grounding. It recomputes paired protocol comparisons,
+    mechanism contributions, query-level ranking changes, and clustered confidence
+    intervals from frozen prediction evidence.
+  </p>
+  <p>
+    <a href="#overview">Overview</a> ·
+    <a href="#key-results">Key Results</a> ·
+    <a href="#quick-start">Quick Start</a> ·
+    <a href="#reproducibility">Reproducibility</a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/Python-3.9%2B-blue" alt="Python" />
+    <img src="https://img.shields.io/badge/Runtime-CPU%20only-brightgreen" alt="CPU" />
+    <img src="https://img.shields.io/badge/Validation-116%2F116-success" alt="Validation 116/116" />
+    <img src="https://img.shields.io/badge/Controls-9%2F9-success" alt="Controls 9/9" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
+  </p>
+</div>
+
+<h2>Highlights</h2>
+<ul>
+<li>Compares <strong>overlap-conditioned</strong> and <strong>fixed GT-frame</strong> scoring on the <strong>same frozen predictions</strong></li>
+<li>On VidSTG, fixed-GT target contrasts reach <strong>2.07–2.32×</strong> the overlap-conditioned contrasts; across four evaluations, <strong>9.0%–36.0%</strong> of queries show <strong>strict query-level ranking flips</strong></li>
+<li>Supports CPU recomputation, mechanism decomposition (A/B/C), source-video clustered CIs, and automated validation</li>
+</ul>
+<h2>Overview</h2>
+<div align="center">
+  <img src="figures/overview.png" alt="Overview of frozen STVG prediction audit and paired scoring protocols" width="92%" />
+  <p><em>Figure 1. Frozen model predictions are scored under a shared sampling map; overlap-conditioned and fixed GT-frame protocols are compared as a paired audit.</em></p>
+</div>
+
+<p>The toolkit does <strong>not</strong> run models, load weights, or read raw videos. All headline numbers below use the <strong>frozen scoring</strong> definition in <code>stvg_protocol_toolkit/config/stat_config.json</code>.</p>
+<h2>Key Results</h2>
+<div align="center">
+  <img src="figures/protocol_effect.png" alt="Protocol effect: overlap vs fixed GT-frame spatial target contrast" width="92%" />
+  <p><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast relative to overlap-conditioned scoring.</em></p>
+</div>
+
+<p>Frozen paired protocol effect $W=\mathrm{mean}(d_{\mathrm{GT}}-d_{\mathrm{ov}})$, with $d=s_T-s_S$. Values below are recomputed from archived boxes and temporal intervals.</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Model</th>
+<th style="text-align: right;">Common Queries</th>
+<th>W (95% CI)</th>
+<th>Strict Rank Flips</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VidSTG</td>
+<td>TubeDETR</td>
+<td style="text-align: right;">200</td>
+<td>0.1324 (0.0995, 0.1661)</td>
+<td>18/200 (9.0%)</td>
+</tr>
+<tr>
+<td>VidSTG</td>
+<td>DeViL</td>
+<td style="text-align: right;">186</td>
+<td>0.1015 (0.0612, 0.1434)</td>
+<td>40/186 (21.5%)</td>
+</tr>
+<tr>
+<td>HC-STVG</td>
+<td>TubeDETR</td>
+<td style="text-align: right;">100</td>
+<td>0.1205 (0.0637, 0.1821)</td>
+<td>26/100 (26.0%)</td>
+</tr>
+<tr>
+<td>HC-STVG</td>
+<td>DeViL</td>
+<td style="text-align: right;">100</td>
+<td>0.1600 (0.0961, 0.2320)</td>
+<td>36/100 (36.0%)</td>
+</tr>
+</tbody>
+</table>
+<p>On VidSTG, the fixed-GT spatial target contrast is <strong>2.07×</strong> (DeViL) to <strong>2.32×</strong> (TubeDETR) the overlap-conditioned contrast. Strict ranking flips are counted at the <strong>query</strong> level.</p>
+<h2>Quick Start</h2>
+<p>Runnable package root: <code>stvg_protocol_toolkit/</code>.</p>
+<pre><code class="language-bash">cd stvg_protocol_toolkit
+python -m pip install -r requirements.txt
+
+python audit_protocol.py \
+  --input data/raw_predictions.jsonl \
+  --config config/stat_config.json \
+  --out outputs/
+
+python scripts/validate_outputs.py
+python stvg_protocol_toolkit/tests/test_edge_cases.py
+</code></pre>
+<p>This release recomputes <strong>scores and statistics from frozen predictions</strong>. It does not reproduce GPU model inference.</p>
+<h2>Inputs and Outputs</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Path</th>
+<th>What it contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td><code>stvg_protocol_toolkit/data/raw_predictions.jsonl</code></td>
+<td>Prediction boxes, temporal intervals, GT, sampling maps</td>
+</tr>
+<tr>
+<td>Summary</td>
+<td><code>stvg_protocol_toolkit/outputs/frozen_protocol_summary.csv</code></td>
+<td>Dual-protocol group aggregates and CIs</td>
+</tr>
+<tr>
+<td>Per-query</td>
+<td><code>stvg_protocol_toolkit/outputs/frozen_per_query.csv</code></td>
+<td>Per-query frozen scores</td>
+</tr>
+<tr>
+<td>Mechanisms</td>
+<td><code>stvg_protocol_toolkit/outputs/decomposition_*.csv</code></td>
+<td>Signed A/B/C contributions</td>
+</tr>
+<tr>
+<td>Ranking</td>
+<td><code>stvg_protocol_toolkit/outputs/ranking_*.csv</code></td>
+<td>Query-level strict flips / tie changes</td>
+</tr>
+<tr>
+<td>Regen</td>
+<td><code>stvg_protocol_toolkit/outputs/regeneration_*.csv</code></td>
+<td>DeViL-32 frozen regeneration comparison</td>
+</tr>
+<tr>
+<td>Exclusions / gaps</td>
+<td><code>exclusion_no_gt_candidates.csv</code>, <code>gaps.json</code></td>
+<td>Excluded queries; scoring gaps (must be empty)</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary><b>Field notes, scoring definition, and mechanism labels</b></summary>
+
+<br>
+
+**Input fields used for recomputation** (`data/raw_predictions.jsonl`, one JSON object per line):
+
+- Identifiers: `group`, `dataset`, `model`, `sample_id`, `video_id`, `source_video_id`, `cluster_id`, `round`
+- Exclusion: `exclusion_reason` (`no_gt_candidate_slots` for 14 DeViL queries; **not** mechanism class A)
+- `arms.Clean|S|T`: `pred_temporal_frames`, `pred_time_sec`, `gt_temporal`, `pair_rows[]` (`abs_frame_id`, `gt_box_xywh`, `pred_box_xywh`), `sampling`, `evidence_sha256`, `score_version`
+- Optional provenance: `orig_*` / `orig_record_scores` (original-run scores; **not** used for frozen recomputation)
+
+**Frozen W** (see `config/stat_config.json`):
+
+`W = mean(d_GT − d_ov)` with `d = s_T − s_S`, `g = s_GT − s_ov`, `w = g_T − g_S`.
+
+Bootstrap: B=10000, seed=20261008; VidSTG clusters by `video_id`, HC-STVG by `source_video_id`; ranking ε=1e-8.
+
+**Mechanism labels**
+
+- **A**: empty GT∩pred temporal intersection → overlap contribution zeroed
+- **B**: nonempty time intersection but no sampled support in the intersection
+- **C / C_full**: nonempty selected frames (both roll into aggregate C)
+- **M**: sampled support present but no valid box pair → gap (not counted as A/B)
+- **`exclusion_reason=no_gt_candidate_slots`**: query-level exclusion (DeViL 14); do not conflate with A
+
+**Frozen vs original-run scores**
+
+- Frozen scores are recomputed here from boxes + temporal intervals with `explicit_gt_interval_v1`
+- Original-run scores (`orig_*`) are retained for provenance only
+
+</details>
+
+<h2>Reproducibility</h2>
+<p>Verified on a clean checkout of this package:</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Statistical acceptance (<code>scripts/validate_outputs.py</code>)</td>
+<td><strong>116/116</strong></td>
+</tr>
+<tr>
+<td>Known-output controls (<code>tests/test_edge_cases.py</code>)</td>
+<td><strong>9/9</strong></td>
+</tr>
+<tr>
+<td>Independent directory recomputation</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>Common queries</td>
+<td>200 / 186 / 100 / 100</td>
+</tr>
+<tr>
+<td>Strict query-level flips</td>
+<td>18/200, 40/186, 26/100, 36/100</td>
+</tr>
+<tr>
+<td>Scoring gaps (<code>outputs/gaps.json</code>)</td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Evidence scope.</strong> DeViL original overlap full boxes were <strong>not archived</strong>. Frozen diagnostics in this toolkit use the <strong>fixed-chain boxes</strong> present in <code>pair_rows</code>. Regeneration (32-query) comparisons are likewise frozen-chain recomputations of archived rounds. This is distinct from any original-run scorer that consumed unrecovered overlap boxes.</p>
+<p>Package-local technical README: <a href="stvg_protocol_toolkit/README.md"><code>stvg_protocol_toolkit/README.md</code></a>.</p>
+<h2>License and Acknowledgments</h2>
+<ul>
+<li>Toolkit code: <a href="stvg_protocol_toolkit/LICENSE">MIT</a></li>
+<li>Third-party notices: <a href="stvg_protocol_toolkit/THIRD_PARTY_NOTICES.md"><code>stvg_protocol_toolkit/THIRD_PARTY_NOTICES.md</code></a></li>
+<li>Upstream dataset licenses apply to raw videos (videos are <strong>not</strong> included). Model code and weights are <strong>not</strong> included.</li>
+</ul></body></html>
