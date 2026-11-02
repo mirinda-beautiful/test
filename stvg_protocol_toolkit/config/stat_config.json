@@ -1,0 +1,54 @@
+{
+  "bootstrap_B": 10000,
+  "bootstrap_seed": 20261008,
+  "ranking_eps": 1e-08,
+  "W_definition": "mean(d_GT - d_ov); d = s_T - s_S; g = s_GT - s_ov; w = g_T - g_S",
+  "cluster": {
+    "VidSTG": "video_id",
+    "HC-STVG": "source_video_id",
+    "HC_n_source_groups_expected": 69
+  },
+  "empty_overlap_value": 0.0,
+  "legal_zero_iou_is_valid": true,
+  "tube_legacy_empty_fixed_returns_zero": true,
+  "devil_fixed_unscorable_is_none": true,
+  "exclusion_reason_no_gt_field": "no_gt_candidate_slots",
+  "mech_class_field": "mech_class",
+  "mech_class_note": "A=empty temporal intersection zeroing; B=time∩ nonempty but no sample support; C/C_full=nonempty selection. Distinct from exclusion_reason=no_gt_candidate_slots.",
+  "recompute_iou_from_boxes": true,
+  "groups_main": [
+    "VidSTG_TubeDETR",
+    "VidSTG_DeViL",
+    "HC_TubeDETR",
+    "HC_DeViL"
+  ],
+  "regen_group": "VidSTG_DeViL_regen32",
+  "reference_common_n": {
+    "VidSTG_TubeDETR": 200,
+    "VidSTG_DeViL": 186,
+    "HC_TubeDETR": 100,
+    "HC_DeViL": 100
+  },
+  "reference_strict_reverse": {
+    "VidSTG_TubeDETR": [
+      18,
+      200
+    ],
+    "VidSTG_DeViL": [
+      40,
+      186
+    ],
+    "HC_TubeDETR": [
+      26,
+      100
+    ],
+    "HC_DeViL": [
+      36,
+      100
+    ]
+  },
+  "toolkit_version": "1.1",
+  "mechanism_definition_version": "explicit_gt_interval_v1",
+  "bootstrap_cluster_order": "sorted canonical video/source ID strings",
+  "mechanism_M_note": "Existing sampled support but no valid box quality; reported as a gap, not an empty-time mechanism."
+}

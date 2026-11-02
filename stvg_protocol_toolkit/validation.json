@@ -1,0 +1,582 @@
+{
+  "ok": true,
+  "n_checks": 116,
+  "n_pass": 116,
+  "toolkit_version": "1.1",
+  "checks": [
+    {
+      "id": "n_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": 200,
+      "got": 200
+    },
+    {
+      "id": "n_VidSTG_DeViL",
+      "ok": true,
+      "expected": 186,
+      "got": 186
+    },
+    {
+      "id": "n_HC_TubeDETR",
+      "ok": true,
+      "expected": 100,
+      "got": 100
+    },
+    {
+      "id": "n_HC_DeViL",
+      "ok": true,
+      "expected": 100,
+      "got": 100
+    },
+    {
+      "id": "W_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": 0.13239369080402807,
+      "got": 0.13239369080402807
+    },
+    {
+      "id": "Delta_ov_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": 0.09995354125472092,
+      "got": 0.09995354125472092
+    },
+    {
+      "id": "Delta_GT_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": 0.232347232058749,
+      "got": 0.232347232058749
+    },
+    {
+      "id": "W_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "Delta_ov_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "Delta_GT_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "W_VidSTG_DeViL",
+      "ok": true,
+      "expected": 0.10148386777804828,
+      "got": 0.10148386777804828
+    },
+    {
+      "id": "Delta_ov_VidSTG_DeViL",
+      "ok": true,
+      "expected": 0.09450306880832525,
+      "got": 0.09450306880832525
+    },
+    {
+      "id": "Delta_GT_VidSTG_DeViL",
+      "ok": true,
+      "expected": 0.19598693658637353,
+      "got": 0.19598693658637353
+    },
+    {
+      "id": "W_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "Delta_ov_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "Delta_GT_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "W_HC_TubeDETR",
+      "ok": true,
+      "expected": 0.12048298299995049,
+      "got": 0.12048298299995049
+    },
+    {
+      "id": "Delta_ov_HC_TubeDETR",
+      "ok": true,
+      "expected": 0.24517450899939022,
+      "got": 0.24517450899939017
+    },
+    {
+      "id": "Delta_GT_HC_TubeDETR",
+      "ok": true,
+      "expected": 0.3656574919993406,
+      "got": 0.3656574919993406
+    },
+    {
+      "id": "W_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "Delta_ov_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "Delta_GT_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "W_HC_DeViL",
+      "ok": true,
+      "expected": 0.15997959292291694,
+      "got": 0.15997959292291694
+    },
+    {
+      "id": "Delta_ov_HC_DeViL",
+      "ok": true,
+      "expected": 0.08834814905318668,
+      "got": 0.08834814905318669
+    },
+    {
+      "id": "Delta_GT_HC_DeViL",
+      "ok": true,
+      "expected": 0.24832774197610366,
+      "got": 0.24832774197610358
+    },
+    {
+      "id": "W_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "Delta_ov_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "Delta_GT_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompA_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": 0.133893414,
+      "got": 0.13389341384272802
+    },
+    {
+      "id": "decompB_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": 0.0,
+      "got": 0.0
+    },
+    {
+      "id": "decompC_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": -0.001499723,
+      "got": -0.0014997230386999427
+    },
+    {
+      "id": "decomp_residual_VidSTG_TubeDETR",
+      "ok": true,
+      "got": 0.0
+    },
+    {
+      "id": "decomp_A_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decomp_B_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decomp_C_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompA_VidSTG_DeViL",
+      "ok": true,
+      "expected": 0.10273363,
+      "got": 0.10273362981095131
+    },
+    {
+      "id": "decompB_VidSTG_DeViL",
+      "ok": true,
+      "expected": 0.009381035,
+      "got": 0.009381035214257778
+    },
+    {
+      "id": "decompC_VidSTG_DeViL",
+      "ok": true,
+      "expected": -0.010630797,
+      "got": -0.01063079724716081
+    },
+    {
+      "id": "decomp_residual_VidSTG_DeViL",
+      "ok": true,
+      "got": -1.3877787807814457e-17
+    },
+    {
+      "id": "decomp_A_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decomp_B_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decomp_C_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompA_HC_TubeDETR",
+      "ok": true,
+      "expected": 0.164838568,
+      "got": 0.1648385676411265
+    },
+    {
+      "id": "decompB_HC_TubeDETR",
+      "ok": true,
+      "expected": 0.0,
+      "got": 0.0
+    },
+    {
+      "id": "decompC_HC_TubeDETR",
+      "ok": true,
+      "expected": -0.044355585,
+      "got": -0.04435558464117609
+    },
+    {
+      "id": "decomp_residual_HC_TubeDETR",
+      "ok": true,
+      "got": -6.938893903907228e-17
+    },
+    {
+      "id": "decomp_A_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decomp_B_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decomp_C_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompA_HC_DeViL",
+      "ok": true,
+      "expected": 0.149327822,
+      "got": 0.14932782235237455
+    },
+    {
+      "id": "decompB_HC_DeViL",
+      "ok": true,
+      "expected": 0.014835531,
+      "got": 0.014835530671841124
+    },
+    {
+      "id": "decompC_HC_DeViL",
+      "ok": true,
+      "expected": -0.00418376,
+      "got": -0.004183760101298739
+    },
+    {
+      "id": "decomp_residual_HC_DeViL",
+      "ok": true,
+      "got": 0.0
+    },
+    {
+      "id": "decomp_A_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decomp_B_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decomp_C_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompA_refcsv_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompB_refcsv_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompC_refcsv_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompA_refcsv_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompB_refcsv_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompC_refcsv_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompA_refcsv_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompB_refcsv_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompC_refcsv_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "decompA_refcsv_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompB_refcsv_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decompC_refcsv_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "decomp_per_query_max_residual",
+      "ok": true,
+      "got": 1.1102230246251565e-16
+    },
+    {
+      "id": "strict_VidSTG_TubeDETR",
+      "ok": true,
+      "expected": "18/200",
+      "got": "18/200"
+    },
+    {
+      "id": "strict_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "tie_ci_present_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "strict_VidSTG_DeViL",
+      "ok": true,
+      "expected": "40/186",
+      "got": "40/186"
+    },
+    {
+      "id": "strict_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "tie_ci_present_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "strict_HC_TubeDETR",
+      "ok": true,
+      "expected": "26/100",
+      "got": "26/100"
+    },
+    {
+      "id": "strict_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "tie_ci_present_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "strict_HC_DeViL",
+      "ok": true,
+      "expected": "36/100",
+      "got": "36/100"
+    },
+    {
+      "id": "strict_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "tie_ci_present_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "regen_baseline_W",
+      "ok": true,
+      "expected": 0.201458860655481,
+      "got": 0.201458860655481
+    },
+    {
+      "id": "regen_R1_W",
+      "ok": true,
+      "expected": 0.19716189076167334,
+      "got": 0.19716189076167334
+    },
+    {
+      "id": "regen_R2_W",
+      "ok": true,
+      "expected": 0.19364691818932217,
+      "got": 0.19364691818932217
+    },
+    {
+      "id": "regen_R1_delta",
+      "ok": true,
+      "expected": -0.004296969893807651,
+      "got": -0.004296969893807651
+    },
+    {
+      "id": "regen_R2_delta",
+      "ok": true,
+      "expected": -0.007811942466158811,
+      "got": -0.007811942466158808
+    },
+    {
+      "id": "regen_baseline_Wci_lo",
+      "ok": true,
+      "expected": 0.085505769,
+      "got": 0.08550576871019763
+    },
+    {
+      "id": "regen_baseline_Wci_hi",
+      "ok": true,
+      "expected": 0.323729616,
+      "got": 0.3237296159544099
+    },
+    {
+      "id": "regen_baseline_dwci_lo",
+      "ok": true,
+      "expected": 0.0,
+      "got": 0.0
+    },
+    {
+      "id": "regen_baseline_dwci_hi",
+      "ok": true,
+      "expected": 0.0,
+      "got": 0.0
+    },
+    {
+      "id": "regen_R1_Wci_lo",
+      "ok": true,
+      "expected": 0.085074436,
+      "got": 0.08507443598806398
+    },
+    {
+      "id": "regen_R1_Wci_hi",
+      "ok": true,
+      "expected": 0.315470573,
+      "got": 0.31547057325628336
+    },
+    {
+      "id": "regen_R1_dwci_lo",
+      "ok": true,
+      "expected": -0.074304529,
+      "got": -0.07430452854478906
+    },
+    {
+      "id": "regen_R1_dwci_hi",
+      "ok": true,
+      "expected": 0.065666953,
+      "got": 0.06566695309566462
+    },
+    {
+      "id": "regen_R2_Wci_lo",
+      "ok": true,
+      "expected": 0.082381805,
+      "got": 0.0823818053372739
+    },
+    {
+      "id": "regen_R2_Wci_hi",
+      "ok": true,
+      "expected": 0.310527219,
+      "got": 0.3105272188665083
+    },
+    {
+      "id": "regen_R2_dwci_lo",
+      "ok": true,
+      "expected": -0.066483677,
+      "got": -0.06648367663551928
+    },
+    {
+      "id": "regen_R2_dwci_hi",
+      "ok": true,
+      "expected": 0.053018802,
+      "got": 0.05301880184719207
+    },
+    {
+      "id": "excl_no_gt_n14",
+      "ok": true,
+      "got": 14
+    },
+    {
+      "id": "excl_reason_field",
+      "ok": true
+    },
+    {
+      "id": "legal_zero_iou_observed",
+      "ok": true
+    },
+    {
+      "id": "mech_class_A_observed",
+      "ok": true
+    },
+    {
+      "id": "mech_class_B_observed",
+      "ok": true
+    },
+    {
+      "id": "mech_class_C_observed",
+      "ok": true
+    },
+    {
+      "id": "w_equals_gT_minus_gS",
+      "ok": true,
+      "got": 1.1102230246251565e-16
+    },
+    {
+      "id": "no_scoring_gaps",
+      "ok": true,
+      "got": 0
+    },
+    {
+      "id": "toolkit_version_1_1",
+      "ok": true
+    },
+    {
+      "id": "mechanism_definition_explicit",
+      "ok": true
+    },
+    {
+      "id": "W_ci_ordered_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "W_mean_in_ci_VidSTG_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "W_ci_ordered_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "W_mean_in_ci_VidSTG_DeViL",
+      "ok": true
+    },
+    {
+      "id": "W_ci_ordered_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "W_mean_in_ci_HC_TubeDETR",
+      "ok": true
+    },
+    {
+      "id": "W_ci_ordered_HC_DeViL",
+      "ok": true
+    },
+    {
+      "id": "W_mean_in_ci_HC_DeViL",
+      "ok": true
+    }
+  ],
+  "notes": {
+    "devil_orig_overlap_boxes": "DeViL original overlap full boxes were not archived; frozen diagnostics use fixed-chain boxes.",
+    "acceptance": "validate_outputs.py reports n_checks from this run (currently 116); edge controls are 9/9."
+  }
+}
