@@ -30,19 +30,19 @@
 
 ## Overview
 
-<div align="center">
-  <img src="assets/figures/overview.png" alt="Overview of frozen STVG prediction audit and paired scoring protocols" width="92%" />
-  <p><em>Figure 1. Frozen model predictions are scored under a shared sampling map; overlap-conditioned and fixed GT-frame protocols are compared as a paired audit.</em></p>
-</div>
+<p align="center">
+  <img src="./assets/figures/overview.png" alt="Overview of frozen STVG prediction audit and paired scoring protocols" width="92%" />
+</p>
+<p align="center"><em>Figure 1. Frozen model predictions are scored under a shared sampling map; overlap-conditioned and fixed GT-frame protocols are compared as a paired audit.</em></p>
 
 The toolkit does **not** run models, load weights, or read raw videos. All headline numbers below use the **frozen scoring** definition in `stvg_protocol_toolkit/config/stat_config.json`.
 
 ## Key Results
 
-<div align="center">
-  <img src="assets/figures/protocol_effect.png" alt="Protocol effect: overlap vs fixed GT-frame spatial target contrast" width="92%" />
-  <p><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast relative to overlap-conditioned scoring.</em></p>
-</div>
+<p align="center">
+  <img src="./assets/figures/protocol_effect.png" alt="Protocol effect: overlap vs fixed GT-frame spatial target contrast" width="92%" />
+</p>
+<p align="center"><em>Figure 2. Same predictions, different scoring support: fixed GT-frame scoring increases measured spatial target contrast relative to overlap-conditioned scoring.</em></p>
 
 Frozen paired protocol effect $W=\mathrm{mean}(d_{\mathrm{GT}}-d_{\mathrm{ov}})$, with $d=s_T-s_S$. Values below are recomputed from archived boxes and temporal intervals.
 
