@@ -1,0 +1,12 @@
+{
+  "note": "Frozen-chain mask re-score on fixed_gt pair_rows (not orig record fields).",
+  "addendum_zip_status": "not_found_on_disk; numbers recomputed from evidence and match provided refs",
+  "devil_n32": {
+    "baseline_W": 0.201458860655481,
+    "R1_W": 0.19716189076167334,
+    "R2_W": 0.19364691818932217,
+    "delta_R1": -0.004296969893807651,
+    "delta_R2": -0.007811942466158811,
+    "orig_record_baseline_W_approx": 0.1905734310319027
+  }
+}

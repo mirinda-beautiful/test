@@ -1,0 +1,15 @@
+sample_id,group,exclusion_reason,n_gt_candidate_slots,note
+vidstg_10626519064_1380_1458_554,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_10729424884_301_316_208,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_11841865713_18_40_1187,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_2436501360_1697_1755_1673,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_3091550860_343_430_785,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_3802656968_133_188_1156,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_4397142322_405_447_1257,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_4570227004_1451_1465_1199,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_4654222137_963_990_1996,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_5810255954_48_62_1573,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_6006751278_240_329_1423,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_6086390405_180_243_1395,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_6991481998_795_844_775,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
+vidstg_9755380174_3420_3509_414,VidSTG_DeViL,no_gt_candidate_slots,0,Distinct from mech_class A (empty temporal intersection zeroing).
